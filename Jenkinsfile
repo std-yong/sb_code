@@ -12,6 +12,7 @@ pipeline {
     gitSshaddress = 'git@github.com:std-yong/sb_code.git'
     gitCredential = 'git_cre' // github credential 생성 시의 ID
     dockerHubRegistry = 'std-yong/sbimage'
+    docketHubRegistryCredential = 'docker_cre'
   }
 
   stages {
@@ -51,12 +52,32 @@ pipeline {
         }
         post {
             failure {
-                echo 'docker image build failure'
+                echo 'docker image Build failure'
             }
             success {
-                echo 'docker image build success'
+                echo 'docker image Build success'
             }
         }
     }
+    stage('Docker image Push') {
+      steps {
+        withDockerRegistry(credentialsId: dockerHubRegistryCredential, url: '') {
+          // withDockerRegistry : docker pipeline 플러그인 설치시 사용가능.
+          // dockerHubRegistryCredential : environment에서 선언한 docker_cre  
+            sh "docker push ${dockerHubRegistry}:${currentBuild.number}"
+            sh "docker push ${dockerHubRegistry}:latest"
+          }
+
+        }
+        post {
+            failure {
+                echo 'docker image Push failure'
+            }
+            success {
+                echo 'docker image Push success'
+            }
+        }
+    }
+
   }
 }
