@@ -79,5 +79,21 @@ pipeline {
         }
     }
 
+
+    stage('Docker container Deployment') {
+      steps {
+            sh "docker rm -f sb"
+            sh "docker run -dp 5656:8085 --name sb ${dockerHubRegistry}:${currentBuild.number}" 
+        }
+        post {
+            failure {
+                echo 'Docker container Deployment failure'
+            }
+            success {
+                echo 'docker container Deployment success'
+            }
+        }
+    }
+
   }
 }
