@@ -2,7 +2,7 @@ pipeline {
   agent any
   // any, none, label, node, docker, dockerfile, kubernetes
   tools{
-    maven 'my_mavenh'
+    maven 'my_maven'
   }
   environment {
     gitName = 'std-yong'
