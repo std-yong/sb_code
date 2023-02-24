@@ -12,7 +12,7 @@ pipeline {
     gitSshaddress = 'git@github.com:std-yong/sb_code.git'
     gitCredential = 'git_cre' // github credential 생성 시의 ID
     dockerHubRegistry = 'std-yong/sbimage'
-    dockerHubRegistryCredential = 'docker_cre'
+    docketHubRegistryCredential = 'docker_cre'
   }
 
   stages {
