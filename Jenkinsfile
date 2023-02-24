@@ -27,18 +27,19 @@ pipeline {
       }
     }
       stage('Maven Build') {
-        steps {
-          sh 'mvn clean install'
-          // maven 플로그인이 미리 설치 되어있어야 함
+      steps {
+        sh 'mvn clean install'
+        // maven 플러그인이 미리 설치 되어있어야 함
         }
         post {
-          failure {
-            echo 'maven build failure'
+            failure {
+                echo 'Maven build failure'
+            }
+            success {
+                echo 'Maven build success'
+            }
         }
-        success {
-            echo 'maven build success'
-        }
-      }
+    }
 
   }
 }
