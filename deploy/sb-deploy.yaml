@@ -28,4 +28,4 @@ spec:
     spec:
       containers:
         - name: spring
-          image: stdyong/sbimage:36
+          image: stdyong/sbimage:41
